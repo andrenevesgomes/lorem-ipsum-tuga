@@ -20,7 +20,7 @@ export const dictionary: Dictionary = {
     ],
     subjects: [
         "o Cristiano Ronaldo", "a Cristina Ferreira", "o Gato Fedorento", "o Zé do Pipo", "uma alheira", 
-        "o Fernando Mendes", "o Toy", "o Jorge Jesus", "o Marcelo", "o Jorge Jesus", "a minha vizinha", "o emplastro",
+        "o Fernando Mendes", "o Toy", "o Jorge Jesus", "o Marcelo", "a minha vizinha", "o emplastro",
         "o Quim Barreiros", "o Herman José", "o taxista", "o gajo do talho", "o meu primo da Suíça",
         "o fiscal das finanças", "o carteiro", "a peixeira", "o trolha", "o estagiário", "o patrão",
         "o árbitro", "o treinador de bancada", "o Zé Povinho", "a padeira de Aljubarrota", "o Camões",
