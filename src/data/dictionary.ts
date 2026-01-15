@@ -28,7 +28,7 @@ export const dictionary: Dictionary = {
         "o meu avô", "o cão do vizinho", "o gato da vizinha", "o papagaio", "o periquito",
         "o Ljubomir Stanisic", "a Tia de Cascais", "o guna da Areosa", "o Primeiro-Ministro",
         "o revisor do comboio", "a funcionária das Finanças", "o gajo dos balões", "o emplastro (outra vez)",
-        "o Quaresma", "a Cinha Jardim", "o Toy", "o homem da buzina", "o arrumador de carros",
+        "o Quaresma", "a Cinha Jardim", "o homem da buzina", "o arrumador de carros",
         "o turista de sandálias", "o condutor de domingo", "a influencer do Instagram",
         "o emigrante 'avec'", "o segurança da discoteca", "o carteiro que toca e foge"
     ],
