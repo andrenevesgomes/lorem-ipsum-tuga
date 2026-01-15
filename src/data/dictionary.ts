@@ -89,7 +89,7 @@ export const dictionary: Dictionary = {
     ],
     slang: [
         "bué da", "ganda", "tipo", "cena", "tuga", "fixe", "tótil", "top", "brutal", "marado", "chanfrado",
-        "giro", "porreiro", "bacano", "fixe", "mó", "kota", "chunga", "beto", "mitra", "gunão",
+        "giro", "porreiro", "bacano", "mó", "kota", "chunga", "beto", "mitra", "gunão",
         "sossio", "primaço", "moca", "pica", "dred", "chavalo", "jarda", "estrilho",
         "manso", "cota", "chavalada", "bué", "ya", "nicles", "baldas", "fino"
     ]
