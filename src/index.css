@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Visible focus ring for keyboard users (mouse clicks stay ring-free) */
+:focus-visible {
+  outline: 3px solid #FFD700;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respect users who prefer reduced motion: kill the SIUUU shake and slide-in */
+@media (prefers-reduced-motion: reduce) {
+  .animate-siuuu,
+  .animate-slide-up,
+  .animate-carimbo {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Custom Background Pattern */
 body {
   @apply bg-gray-50 text-gray-900 transition-colors duration-300;

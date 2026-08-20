@@ -19,6 +19,20 @@ Inclui:
 
 ## ✨ Funcionalidades Épicas
 
+### 🎛️ Filtros à la Carte (e que funcionam mesmo!)
+Não és fã do Quim Barreiros? Estás de dieta e não queres ver francesinhas? Sem problema. Liga e desliga as categorias como quem escolhe o recheio do prego:
+- **🌟 Figuras Públicas**: Do CR7 à Cristina Ferreira. Desliga e o texto fica anónimo, como uma testemunha em tribunal.
+- **🗣️ Expressões Típicas**: Os "Eh pá" e "tás a ver?" da praxe. Sem eles, o texto fica mais seco que bacalhau por demolhar.
+- **🥘 Comida**: Toda a gastronomia nacional. Desliga se estiveres com fome, para não sofreres.
+
+### 🔗 Cada Chouriço com a Sua Morada (Partilha)
+Gostas do disparate que te saiu? **Atira o link a um preguiçoso.** Cada geração fica guardada no endereço (URL) com uma semente própria — quem abrir o link vê *exatamente* o mesmo texto que tu. Reproduzível como a receita da avó, nem uma vírgula muda. No telemóvel abre a folha de partilha nativa; no computador copia o link para a área de transferência.
+
+E ainda melhor: quando atiras o link para o WhatsApp, Twitter ou LinkedIn, o *preview* mostra o próprio chouriço que geraste — uma imagem feita na hora (`/api/og`) com o teu texto lá dentro. Nada de imagem genérica.
+
+### 🎲 Botão "Surpreende-me"
+Sem paciência para escolher? Carrega no dado e deixa o destino decidir os parágrafos, a intensidade e as categorias. O que sai, sai — e é mesmo o que fica no ecrã.
+
 ### 🎚️ O "Azeitómetro" (Slider de Intensidade)
 Controla o nível de "tuganess" do teu texto. Desde o discurso cuidado até à conversa de tasca às 3 da manhã:
 1. **Suave**: Seguro para mostrar à avó.
@@ -41,6 +55,7 @@ Isto não é um site feito no Bloco de Notas. Estamos a falar de tecnologia de p
 - **TypeScript**: Porque gostamos de evitar erros (ao contrário da defesa da Seleção em 2004).
 - **Vite**: Mais rápido que o GNR a passar multas.
 - **Tailwind CSS**: Para ficar bonito sem esforço.
+- **Vitest**: Para dormir descansado, que o código não parte sozinho.
 
 ## 📦 Como Instalar esta Obra de Arte
 
@@ -49,19 +64,25 @@ Isto não é um site feito no Bloco de Notas. Estamos a falar de tecnologia de p
    git clone https://github.com/andrenevesgomes/lorem-ipsum-tuga.git
    ```
 
-2. Entra na pasta e instala as dependências:
+2. Entra na pasta e instala as dependências: (usamos **pnpm**, respeitinho):
    ```bash
    cd lorem-ipsum-tuga
-   npm install
-   # ou pnpm install, se fores hipster
+   pnpm install
+   # da equipa npm? npm install também serve, lá vais tu...
    ```
 
 3. Mete a máquina a trabalhar:
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 4. Abre o browser e delicia-te.
+
+### 🧪 E os testes?
+Sim, isto tem testes (não somos uns aldrabões). Corre-os assim:
+```bash
+pnpm test
+```
 
 ## 🤝 Como Contribuir
 Queres adicionar aquela expressão que o teu tio de Trás-os-Montes diz sempre?

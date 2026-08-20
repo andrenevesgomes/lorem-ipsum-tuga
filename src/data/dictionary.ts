@@ -1,11 +1,20 @@
 export interface Dictionary {
     intros: string[];
-    subjects: string[];
+    people: string[];
+    celebrities: string[];
     actions: string[];
+    foodActions: string[];
     complements: string[];
+    foodComplements: string[];
     connectors: string[];
     endings: string[];
     slang: string[];
+}
+
+export interface GeneratorOptions {
+    celebrities: boolean;
+    expressions: boolean;
+    food: boolean;
 }
 
 export const dictionary: Dictionary = {
@@ -18,26 +27,31 @@ export const dictionary: Dictionary = {
         "Escuta lá,", "Vá lá, sê sincero,", "Olha que a vida não custa nada,", "É assim,", "Ora bem,",
         "Digo-te uma coisa,", "Imagina só tu,", "Oh pá, cala-te,", "Não vais acreditar,", "Vou-te contar uma,"
     ],
-    subjects: [
-        "o Cristiano Ronaldo", "a Cristina Ferreira", "o Gato Fedorento", "o Zé do Pipo", "uma alheira", 
-        "o Fernando Mendes", "o Toy", "o Jorge Jesus", "o Marcelo", "a minha vizinha", "o emplastro",
-        "o Quim Barreiros", "o Herman José", "o taxista", "o gajo do talho", "o meu primo da Suíça",
-        "o fiscal das finanças", "o carteiro", "a peixeira", "o trolha", "o estagiário", "o patrão",
-        "o árbitro", "o treinador de bancada", "o Zé Povinho", "a padeira de Aljubarrota", "o Camões",
-        "o D. Afonso Henriques", "o Presidente da Junta", "o homem do lixo", "a senhora do café",
-        "o meu avô", "o cão do vizinho", "o gato da vizinha", "o papagaio", "o periquito",
-        "o Ljubomir Stanisic", "a Tia de Cascais", "o guna da Areosa", "o Primeiro-Ministro",
+    // Generic folk, jobs and characters — always available so the generator never runs dry.
+    people: [
+        "o Zé do Pipo", "uma alheira", "a minha vizinha", "o emplastro", "o taxista", "o gajo do talho",
+        "o meu primo da Suíça", "o fiscal das finanças", "o carteiro", "a peixeira", "o trolha",
+        "o estagiário", "o patrão", "o árbitro", "o treinador de bancada", "o Zé Povinho",
+        "a padeira de Aljubarrota", "o Camões", "o D. Afonso Henriques", "o Presidente da Junta",
+        "o homem do lixo", "a senhora do café", "o meu avô", "o cão do vizinho", "o gato da vizinha",
+        "o papagaio", "o periquito", "a Tia de Cascais", "o guna da Areosa", "o Primeiro-Ministro",
         "o revisor do comboio", "a funcionária das Finanças", "o gajo dos balões", "o emplastro (outra vez)",
-        "o Quaresma", "a Cinha Jardim", "o homem da buzina", "o arrumador de carros",
-        "o turista de sandálias", "o condutor de domingo", "a influencer do Instagram",
-        "o emigrante 'avec'", "o segurança da discoteca", "o carteiro que toca e foge"
+        "o homem da buzina", "o arrumador de carros", "o turista de sandálias", "o condutor de domingo",
+        "a influencer do Instagram", "o emigrante 'avec'", "o segurança da discoteca",
+        "o carteiro que toca e foge"
+    ],
+    // Named public figures — only used when "Figuras Públicas" is on.
+    celebrities: [
+        "o Cristiano Ronaldo", "a Cristina Ferreira", "o Gato Fedorento", "o Fernando Mendes", "o Toy",
+        "o Jorge Jesus", "o Marcelo", "o Quim Barreiros", "o Herman José", "o Ljubomir Stanisic",
+        "o Quaresma", "a Cinha Jardim"
     ],
     actions: [
-        "foi aos caracóis", "partiu a loiça toda", "ficou a ver navios", "mandou vir um bitoque", 
+        "partiu a loiça toda", "ficou a ver navios", 
         "foi comprar tabaco", "perdeu a carteira", "ganhou o Euromilhões", "foi à bola", 
-        "apanhou uma bebedeira", "comeu uma francesinha", "foi ao Santuário", "apanhou o elétrico 28",
+        "apanhou uma bebedeira", "foi ao Santuário", "apanhou o elétrico 28",
         "foi ver o Benfica", "foi ver o Sporting", "foi ver o Porto", "armou uma peixeirada",
-        "foi à feira", "comprou um pastel de nata", "bebeu uma ginjinha", "foi ao fado",
+        "foi à feira", "foi ao fado",
         "apanhou uma seca", "deu um ganda tralho", "foi apanhar sol", "foi à praia",
         "foi ao shopping", "foi ao cinema", "foi ao teatro", "foi ao concerto", "foi ao festival",
         "foi à discoteca", "foi ao bar", "foi ao restaurante", "foi ao café", "foi à pastelaria",
@@ -45,16 +59,21 @@ export const dictionary: Dictionary = {
         "foi ao médico", "foi ao dentista", "foi ao hospital", "foi ao centro de saúde",
         "ficou preso no IC19", "reclamou do preço da gasolina", "foi ao Big Brother", 
         "insultou o trânsito", "apanhou uma multa", "tentou fugir ao fisco", 
-        "comeu um pastel de bacalhau", "bebeu um bagaço", "foi às compras ao chinês", 
+        "foi às compras ao chinês", 
         "meteu 20 euros de gasolina", "disse que ia pagar mas esqueceu-se", "foi ver as montras",
-        "adormeceu na praia", "queimou o assado", "perdeu o passe", "apanhou o Fertagus",
+        "adormeceu na praia", "perdeu o passe", "apanhou o Fertagus",
         "discutiu com a sogra", "foi à manif", "mandou vir com o árbitro"
+    ],
+    // Food & drink actions — only used when "Comida" is on.
+    foodActions: [
+        "foi aos caracóis", "mandou vir um bitoque", "comeu uma francesinha", "comprou um pastel de nata",
+        "bebeu uma ginjinha", "comeu um pastel de bacalhau", "bebeu um bagaço", "queimou o assado"
     ],
     complements: [
         "no Chiado", "com o Fernando Mendes", "antes do telejornal", "na casa da vizinha", 
         "no Pingo Doce", "na tasca do Zé", "em Leiria (que não existe)", "no Algarve", 
         "na ponte 25 de Abril", "no meio do trânsito", "na fila da segurança social",
-        "enquanto comia tremoços", "a ouvir Xutos", "com uma imperial na mão",
+        "a ouvir Xutos",
         "na Segunda Circular", "no Marquês de Pombal", "na Torre de Belém", "nos Jerónimos",
         "na Ribeira", "na Baixa", "no Rossio", "no Bairro Alto", "em Alfama", "na Mouraria",
         "em Sintra", "em Cascais", "no Estoril", "na Caparica", "na Arrábida", "no Gerês",
@@ -64,8 +83,13 @@ export const dictionary: Dictionary = {
         "na festa da aldeia", "na Queima das Fitas", "no Cais do Sodré", 
         "na rotunda do Marquês", "numa esplanada à beira-mar", "no tasco do Manel", 
         "na Loja do Cidadão", "no autocarro da Carris", "a ouvir pimba",
-        "com o bilhete na mão", "à porta da Zara", "na fila para o brunch",
-        "no parque de campismo", "na rulote das farturas", "no Santuário de Fátima"
+        "com o bilhete na mão", "à porta da Zara",
+        "no parque de campismo", "no Santuário de Fátima"
+    ],
+    // Food & drink complements — only used when "Comida" is on.
+    foodComplements: [
+        "enquanto comia tremoços", "com uma imperial na mão", "na fila para o brunch",
+        "na rulote das farturas"
     ],
     connectors: [
         "e depois", "mas de repente", "porque", "visto que", "só que", "entretanto", "por isso é que",

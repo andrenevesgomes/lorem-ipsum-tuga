@@ -20,6 +20,7 @@ export default {
       animation: {
         'siuuu': 'siuuu 0.6s ease-in-out',
         'slide-up': 'slideUp 0.4s ease-out',
+        'carimbo': 'carimbo 0.4s ease-out',
       },
       keyframes: {
         siuuu: {
@@ -31,7 +32,12 @@ export default {
         slideUp: {
           'from': { opacity: '0', transform: 'translateY(20px)' },
           'to': { opacity: '1', transform: 'translateY(0)' },
-        }
+        },
+        carimbo: {
+          '0%': { transform: 'scale(1.7) rotate(-14deg)', opacity: '0' },
+          '55%': { transform: 'scale(0.82) rotate(5deg)', opacity: '1' },
+          '100%': { transform: 'scale(1) rotate(0)', opacity: '1' },
+        },
       }
     },
   },
