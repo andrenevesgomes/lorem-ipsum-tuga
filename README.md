@@ -14,7 +14,7 @@ Ideal para preencher layouts enquanto esperas que o cliente te envie os textos (
 Inclui:
 - 🗣️ **Expressões Típicas**: "Imagina", "Eh pá", "Ouve lá", "Diz-me uma coisa", "Estás a ver?".
 - 🌟 **Celebridades Nacionais**: Do CR7 ao Quim Barreiros, passando pelo Fernando Mendes.
-- 🥘 **Gastronomia**: Francesinhas, Alheiras, Cozido à Portuguesa e muito Vinho Verde.
+- 🥘 **Gastronomia**: Francesinhas, bifanas, sardinhas à mão, pastéis de nata e uma ginjinha para a caminhada.
 - 🚗 **Azeite**: Uma quantidade perigosa de azeite.
 
 ## ✨ Funcionalidades Épicas
