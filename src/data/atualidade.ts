@@ -2,27 +2,44 @@
 // Regras: só temas leves (impostos, calor, filas, futebol, casas). Nada de tragédias,
 // crimes, guerras, mortes ou acusações a pessoas reais. Tira o que já ninguém se lembra.
 export const atualidade = {
-    revistoEm: '2026-10-09',
+    revistoEm: '2026-10-13',
     intros: [
-        "Ponto número um de oito:", "Segundo o Orçamento,", "Com 32 graus em outubro,",
-        "Diz que foi a IA que escreveu, mas"
+        "Segundo as contas de outubro,",
+        "Com este calor fora de época,",
+        "Na saga da casa própria,",
+        "Entre filas e senhas,",
+        "No rescaldo do fim de semana,"
     ],
     actions: [
-        "escreveu um comunicado de oito pontos", "disse que foi tudo um mal-entendido",
-        "saiu pela porta pequena", "fez as contas ao alívio do IRS e deu para um gelado",
-        "pediu à IA para fazer o Orçamento", "ligou para a SNS24 e ainda está à espera",
-        "foi a banhos em pleno outubro", "transformou a marquise em alojamento local",
-        "fez um cordão humano à volta do Bolhão", "candidatou Lisboa aos Jogos Olímpicos",
-        "exigiu a semana de quatro dias", "está à espera que vendam a TAP",
-        "atestou o depósito e chorou baixinho"
+        "fez as contas ao IRS e ficou a dever um café",
+        "abriu a app dos preços e fechou-a com respeito",
+        "ligou o ar condicionado em outubro sem pedir desculpa",
+        "entrou na fila certa e acabou noutra maior",
+        "discutiu o penálti no café como se fosse VAR",
+        "procurou um T1 e encontrou um quarto com varanda imaginária",
+        "esperou pela obra prometida e trouxe lanche",
+        "foi ver rendas e voltou para casa dos pais",
+        "meteu gasolina de 20 euros e ganhou ansiedade",
+        "juntou-se à romaria das portagens à hora de ponta",
+        "prometeu poupança e rebentou no supermercado",
+        "marcou jantar cedo para fugir ao trânsito e apanhou-o na mesma"
     ],
     complements: [
-        "no estágio da Seleção", "num T0 a 1500 euros por mês", "debaixo da gota fria",
-        "à porta do aeroporto novo (previsto para 2037)", "no debate do Orçamento",
-        "com o ar condicionado no máximo em outubro"
+        "na hora de ponta",
+        "com print no grupo da família",
+        "ao balcão mais lento",
+        "entre dois avisos de subida",
+        "numa segunda-feira quente demais",
+        "com sotaque de comentador de bancada",
+        "à espera da próxima atualização",
+        "com cara de \"isto é normal\""
     ],
     endings: [
-        ", foi um mal-entendido!", ", dá para um gelado!", ", são oito pontos!",
-        ", a culpa é da gota fria!"
+        ", siga para bingo!",
+        ", alguém explique isto?",
+        ", já ninguém estranha!",
+        ", foi só para aquecer!",
+        ", tudo dentro do previsto, certo?",
+        ", e amanhã há mais!"
     ]
 };
