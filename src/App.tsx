@@ -4,6 +4,7 @@ import { Controls } from './components/Controls';
 import { OutputBox } from './components/OutputBox';
 import { Toast } from './components/Toast';
 import { Flag } from './components/Flag';
+import { About } from './components/About';
 import { generator } from './utils/generator';
 import { encodeShareState, decodeShareState, randomSeed, ShareState } from './utils/urlState';
 import { Copy, Check, Dice5 } from 'lucide-react';
@@ -149,7 +150,7 @@ function App() {
     };
 
     return (
-        <main className="min-h-screen flex items-center justify-center p-4 md:p-8">
+        <main className="min-h-screen flex flex-col items-center justify-center gap-12 p-4 md:p-8">
             <div className="w-full max-w-3xl bg-white dark:bg-gray-900 rounded-3xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] p-6 md:p-12 border-t-8 border-t-tuga-green border-b-8 border-b-tuga-red relative overflow-hidden transition-colors duration-300">
                 
                 {/* Decorative Flag Strip */}
@@ -224,6 +225,8 @@ function App() {
                     </div>
                 )}
             </div>
+
+            <About />
 
             <Toast show={showToast} onClose={() => setShowToast(false)} message={toastMessage} />
         </main>
