@@ -49,3 +49,33 @@ export function decodeShareState(search: string): ShareState | null {
 export function randomSeed(): number {
     return Math.floor(Math.random() * 0x100000000) >>> 0;
 }
+
+/** Today's date in Portugal (YYYY-MM-DD): "o chouriço de hoje" changes at Lisbon midnight. */
+export function lisbonDate(now: Date = new Date()): string {
+    return new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Lisbon',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    }).format(now);
+}
+
+/** FNV-1a: everyone gets the same seed on the same day, and nearby days look unrelated. */
+export function dailySeed(date: string): number {
+    let hash = 0x811c9dc5;
+    for (let i = 0; i < date.length; i++) {
+        hash ^= date.charCodeAt(i);
+        hash = Math.imul(hash, 0x01000193);
+    }
+    return hash >>> 0;
+}
+
+/** The text shown on arrival: default settings, today's seed. */
+export function dailyState(now: Date = new Date()): ShareState {
+    return {
+        paragraphs: 3,
+        intensity: 50,
+        options: { celebrities: true, expressions: true, food: true },
+        seed: dailySeed(lisbonDate(now)),
+    };
+}

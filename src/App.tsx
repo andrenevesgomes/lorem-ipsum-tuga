@@ -6,7 +6,7 @@ import { Toast } from './components/Toast';
 import { Flag } from './components/Flag';
 import { About } from './components/About';
 import { generator } from './utils/generator';
-import { encodeShareState, decodeShareState, randomSeed, ShareState } from './utils/urlState';
+import { encodeShareState, decodeShareState, randomSeed, dailyState, ShareState } from './utils/urlState';
 import { Copy, Check, Dice5 } from 'lucide-react';
 
 const COPY_MESSAGE = 'Já está no bucho! (Copiado)';
@@ -18,15 +18,17 @@ function App() {
     const [darkMode, setDarkMode] = useState(
         () => typeof document === 'undefined' || document.documentElement.classList.contains('dark'),
     );
-    const [paragraphs, setParagraphs] = useState(3);
-    const [intensity, setIntensity] = useState(50);
-    const [options, setOptions] = useState({
-        celebrities: true,
-        expressions: true,
-        food: true
-    });
-    const [outputText, setOutputText] = useState<string[]>([]);
-    const [lastGen, setLastGen] = useState<ShareState | null>(null);
+    // Arrive with text already on screen: a shared link's text, or else today's.
+    const [initial] = useState<ShareState>(
+        () => (typeof window !== 'undefined' && decodeShareState(window.location.search)) || dailyState(),
+    );
+    const [paragraphs, setParagraphs] = useState(initial.paragraphs);
+    const [intensity, setIntensity] = useState(initial.intensity);
+    const [options, setOptions] = useState(initial.options);
+    const [outputText, setOutputText] = useState<string[]>(
+        () => generator.generate(initial.paragraphs, initial.intensity, initial.options, initial.seed),
+    );
+    const [lastGen, setLastGen] = useState<ShareState | null>(initial);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState(COPY_MESSAGE);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -46,17 +48,6 @@ function App() {
             // Storage blocked (private mode): the toggle still works for this visit.
         }
     };
-
-    // Reproduce a shared generation from the URL on first load (?p=..&s=..).
-    useEffect(() => {
-        const shared = decodeShareState(window.location.search);
-        if (!shared) return;
-        setParagraphs(shared.paragraphs);
-        setIntensity(shared.intensity);
-        setOptions(shared.options);
-        setLastGen(shared);
-        setOutputText(generator.generate(shared.paragraphs, shared.intensity, shared.options, shared.seed));
-    }, []);
 
     // Generate deterministically from a full state and reflect it in the URL, so the
     // link in the address bar always reproduces exactly what's on screen.

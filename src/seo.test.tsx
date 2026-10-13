@@ -29,6 +29,12 @@ describe('SEO: what crawlers get', () => {
         expect(prerendered).toMatch(/<main\b/);
     });
 
+    it('arrives with a generated text instead of an empty box', () => {
+        const output = prerendered.match(/<div id="output-text"[^>]*>([\s\S]*?)<\/div>/)?.[1] ?? '';
+        expect(output.match(/<p\b/g)).toHaveLength(3);
+        expect(prerendered).not.toContain('Ainda não há chouriço nenhum');
+    });
+
     it('has a meta description that fits in a search result', () => {
         for (const html of [indexHtml, dicionarioHtml]) {
             const description = descriptionOf(html);
