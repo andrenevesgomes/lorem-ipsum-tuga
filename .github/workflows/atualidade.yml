@@ -22,19 +22,13 @@ jobs:
       - name: Recolher títulos do mês (sem tragédias)
         run: node scripts/atualidade.mjs > "$RUNNER_TEMP/titulos.md"
 
-      - name: Abrir issue e entregá-la ao Copilot
+      - name: Pôr o Copilot a trabalhar
         env:
           GH_TOKEN: ${{ github.token }}
-          # Fine-grained PAT of a Copilot user; without it the issue is opened for a human.
+          # Fine-grained PAT of a Copilot user (permissions: Agent tasks, Contents, Issues, Pull requests).
           AGENT_TOKEN: ${{ secrets.COPILOT_AGENT_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
-          open=$(gh issue list --repo "$REPO" --state open --search 'in:title "Atualidade de"' --json number --jq length)
-          if [ "$open" != "0" ]; then
-            echo "Já há uma issue aberta."
-            exit 0
-          fi
-
           body="$RUNNER_TEMP/body.md"
           {
             cat <<'EOF'
@@ -58,20 +52,59 @@ jobs:
           } > "$body"
 
           title="Atualidade de $(date +%Y-%m)"
+
+          # 1. Agent task API: no issue needed (Copilot Business/Enterprise only).
           if [ -n "$AGENT_TOKEN" ]; then
-            jq -n --arg title "$title" --rawfile body "$body" --arg repo "$REPO" '{
-              title: $title,
-              body: $body,
-              assignees: ["copilot-swe-agent[bot]"],
-              agent_assignment: {
-                target_repo: $repo,
-                base_branch: "main",
-                custom_instructions: "Só alteras src/data/atualidade.ts. Corre pnpm test antes de abrir o PR.",
-                custom_agent: "",
-                model: ""
-              }
-            }' | GH_TOKEN="$AGENT_TOKEN" gh api --method POST "repos/$REPO/issues" --input - --jq .html_url \
-              && exit 0
-            echo "::warning::Não deu para entregar ao Copilot; a issue fica para um humano."
+            if url=$(jq -n --rawfile prompt "$body" '{prompt: $prompt, base_ref: "main", create_pull_request: true}' \
+                | GH_TOKEN="$AGENT_TOKEN" gh api --method POST "agents/repos/$REPO/tasks" --input - --jq '.html_url // .id' 2>"$RUNNER_TEMP/task.err"); then
+              echo "Copilot a trabalhar: $url" | tee -a "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            echo "::notice::Tarefa direta indisponível: $(head -c 300 "$RUNNER_TEMP/task.err")"
           fi
-          gh issue create --repo "$REPO" --title "$title" --body-file "$body"
+
+          # 2. Issue assigned to Copilot (works on Copilot Pro), or for a human without a token.
+          if [ "$(gh api "repos/$REPO" --jq .has_issues)" = "true" ]; then
+            open=$(gh issue list --repo "$REPO" --state open --search 'in:title "Atualidade de"' --json number --jq length)
+            if [ "$open" != "0" ]; then
+              echo "Já há uma issue aberta."
+              exit 0
+            fi
+            if [ -n "$AGENT_TOKEN" ]; then
+              jq -n --arg title "$title" --rawfile body "$body" --arg repo "$REPO" '{
+                title: $title,
+                body: $body,
+                assignees: ["copilot-swe-agent[bot]"],
+                agent_assignment: {
+                  target_repo: $repo,
+                  base_branch: "main",
+                  custom_instructions: "Só alteras src/data/atualidade.ts. Corre pnpm test antes de abrir o PR.",
+                  custom_agent: "",
+                  model: ""
+                }
+              }' | GH_TOKEN="$AGENT_TOKEN" gh api --method POST "repos/$REPO/issues" --input - --jq .html_url \
+                && exit 0
+              echo "::warning::Não deu para entregar ao Copilot; a issue fica para um humano."
+            fi
+            gh issue create --repo "$REPO" --title "$title" --body-file "$body"
+            exit 0
+          fi
+
+          # 3. No way in: leave the ready-made prompt in the run summary and say what to enable.
+          {
+            echo "## $title"
+            echo
+            echo "Não deu para pôr o Copilot a trabalhar. Escolhe uma:"
+            echo
+            echo "- Ativar **Issues** no repositório (Settings → General → Features) e ter o Copilot cloud agent ativo; ou"
+            echo "- Usar um token de uma conta Copilot Business/Enterprise com a permissão **Agent tasks**; ou"
+            echo "- Colar o prompt abaixo no separador **Agents** do repositório."
+            echo
+            echo "<details><summary>Prompt pronto a colar</summary>"
+            echo
+            cat "$body"
+            echo
+            echo "</details>"
+          } >> "$GITHUB_STEP_SUMMARY"
+          echo "::error::Nem tarefa direta nem Issues disponíveis. O prompt ficou no resumo desta execução."
+          exit 1

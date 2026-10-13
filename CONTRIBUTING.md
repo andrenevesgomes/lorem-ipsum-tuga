@@ -43,7 +43,7 @@ Vai a `src/data/dictionary.ts`. Antes de adicionar:
 
 ### Atualidade
 
-As piadas do momento vivem em `src/data/atualidade.ts`, separadas do resto para serem fáceis de trocar. No dia 1 de cada mês o workflow "Atualidade do mês" recolhe títulos do Observador, Público e RTP (já sem tragédias, crimes e guerras), abre uma issue e entrega-a ao Copilot, que abre um PR. Um humano revê sempre antes do merge.
+As piadas do momento vivem em `src/data/atualidade.ts`, separadas do resto para serem fáceis de trocar. No dia 1 de cada mês o workflow "Atualidade do mês" recolhe títulos do Observador, Público e RTP (já sem tragédias, crimes e guerras) e põe o Copilot a trabalhar: com uma tarefa direta (Copilot Business/Enterprise) ou com uma issue atribuída ao Copilot (precisa das Issues ativas). O Copilot abre um PR e um humano revê sempre antes do merge. Se nenhum caminho estiver disponível, o prompt fica no resumo da execução para colar no separador **Agents**.
 
 - Temas leves que toda a gente apanhou: impostos, calor fora de época, filas, futebol, casas pela hora da morte.
 - A piada é sobre a situação, não sobre uma pessoa real. Nada de tragédias, crimes, guerras ou mortes.
