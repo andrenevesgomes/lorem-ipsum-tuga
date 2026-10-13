@@ -2,16 +2,42 @@ import { dictionary, type GeneratorOptions } from '../data/dictionary.js';
 import { atualidade } from '../data/atualidade.js';
 
 interface WorkingDictionary {
-    intros: string[];
-    subjects: string[];
-    actions: string[];
-    cheekyActions: string[];
-    complements: string[];
-    connectors: string[];
-    endings: string[];
-    slang: string[];
-    slangAdjectives: string[];
+    intros: Bag;
+    subjects: Bag;
+    actions: Bag;
+    cheekyActions: Bag;
+    complements: Bag;
+    connectors: Bag;
+    endings: Bag;
+    slang: Bag;
+    slangAdjectives: Bag;
 }
+
+// Hands out every item once before repeating any, so long texts never run dry.
+class Bag {
+    private left: string[] = [];
+    constructor(private readonly source: string[]) {}
+
+    get isEmpty(): boolean {
+        return this.source.length === 0;
+    }
+
+    items(): string[] {
+        if (this.left.length === 0) this.left = [...this.source];
+        return this.left;
+    }
+}
+
+// Words too common to count as a repeated theme.
+const COMMON = new Set(['outra', 'minha', 'porque', 'depois', 'ainda', 'sobre', 'entre', 'quando', 'mesmo', 'muito', 'horas', 'euros']);
+
+// "no debate do Orçamento" -> ["debate", "orçamento"]: the words a reader would notice twice.
+function keyWords(phrase: string): string[] {
+    return (phrase.toLowerCase().match(/\p{L}{5,}/gu) ?? []).filter((w) => !COMMON.has(w));
+}
+
+// Draws per pick before settling for a phrase that repeats a theme.
+const ATTEMPTS = 6;
 
 const DEFAULT_OPTIONS: GeneratorOptions = {
     celebrities: true,
@@ -50,76 +76,76 @@ export class TugaGenerator {
         seed?: number,
     ): string[] {
         const rng: Rng = seed === undefined ? Math.random : mulberry32(seed);
+        // One bank for the whole text, so a phrase doesn't come back in the next paragraph.
+        const bank = this.buildBank(options);
+        const used = new Set<string>();
         const paragraphs: string[] = [];
         for (let i = 0; i < numParagraphs; i++) {
-            paragraphs.push(this.createParagraph(intensity, options, rng));
+            paragraphs.push(this.createParagraph(intensity, bank, used, rng));
         }
         return paragraphs;
     }
 
-    // Build a fresh, filtered word bank. "people" and general actions/complements are
-    // always present so the generator never runs out of words, whatever the options.
+    // "people" and general actions/complements are always present so the generator
+    // never runs out of words, whatever the options.
     private buildBank(options: GeneratorOptions): WorkingDictionary {
         return {
-            intros: options.expressions ? [...dictionary.intros, ...atualidade.intros] : [],
-            subjects: [
+            intros: new Bag(options.expressions ? [...dictionary.intros, ...atualidade.intros] : []),
+            subjects: new Bag([
                 ...dictionary.people,
                 ...(options.celebrities ? dictionary.celebrities : []),
-            ],
-            actions: [
+            ]),
+            actions: new Bag([
                 ...dictionary.actions,
                 ...atualidade.actions,
                 ...(options.food ? dictionary.foodActions : []),
-            ],
-            cheekyActions: [...dictionary.cheekyActions],
-            complements: [
+            ]),
+            cheekyActions: new Bag(dictionary.cheekyActions),
+            complements: new Bag([
                 ...dictionary.complements,
                 ...atualidade.complements,
                 ...(options.food ? dictionary.foodComplements : []),
-            ],
-            connectors: [...dictionary.connectors],
-            endings: options.expressions ? [...dictionary.endings, ...atualidade.endings] : [],
-            slang: options.expressions ? [...dictionary.slang] : [],
-            slangAdjectives: options.expressions ? [...dictionary.slangAdjectives] : [],
+            ]),
+            connectors: new Bag(dictionary.connectors),
+            endings: new Bag(options.expressions ? [...dictionary.endings, ...atualidade.endings] : []),
+            slang: new Bag(options.expressions ? dictionary.slang : []),
+            slangAdjectives: new Bag(options.expressions ? dictionary.slangAdjectives : []),
         };
     }
 
-    private createParagraph(intensity: number, options: GeneratorOptions, rng: Rng): string {
+    private createParagraph(intensity: number, bank: WorkingDictionary, used: Set<string>, rng: Rng): string {
         const numSentences = Math.floor(rng() * 4) + 3; // 3 to 6 sentences
-
-        // Fresh bank per paragraph so getRandomAndRemove dedupes within the paragraph.
-        const tempData = this.buildBank(options);
 
         let paragraph = "";
         for (let i = 0; i < numSentences; i++) {
-            paragraph += this.createSentence(intensity, tempData, rng) + " ";
+            paragraph += this.createSentence(intensity, bank, used, rng) + " ";
         }
 
         return paragraph.trim();
     }
 
-    private createSentence(intensity: number, tempData: WorkingDictionary, rng: Rng): string {
+    private createSentence(intensity: number, bank: WorkingDictionary, used: Set<string>, rng: Rng): string {
         const isComplex = rng() > 0.5;
         const useSlang = (intensity / 100) > rng();
         
         let sentence = "";
         
         // 1. Intro (only when expressions are enabled and available)
-        if (tempData.intros.length > 0 && rng() > 0.3) {
-            sentence += this.getRandomAndRemove(tempData.intros, rng) + " ";
+        if (!bank.intros.isEmpty && rng() > 0.3) {
+            sentence += this.pick([bank.intros], used, rng) + " ";
         }
 
         // 2. Core Sentence
-        sentence += this.buildCoreSentence(useSlang, tempData, rng);
+        sentence += this.buildCoreSentence(useSlang, bank, used, rng);
 
         // 3. Connector + Second part
         if (isComplex) {
-            sentence += " " + this.getRandomAndRemove(tempData.connectors, rng) + " " + this.buildCoreSentence(useSlang, tempData, rng);
+            sentence += " " + this.pick([bank.connectors], used, rng) + " " + this.buildCoreSentence(useSlang, bank, used, rng);
         }
 
         // 4. Ending (fall back to a full stop when no expressive endings are available)
-        if (tempData.endings.length > 0 && rng() < (intensity / 100)) {
-            sentence += this.getRandomAndRemove(tempData.endings, rng);
+        if (!bank.endings.isEmpty && rng() < (intensity / 100)) {
+            sentence += this.pick([bank.endings], used, rng);
         } else {
             sentence += ".";
         }
@@ -133,44 +159,46 @@ export class TugaGenerator {
         return sentence;
     }
 
-    private buildCoreSentence(useSlang: boolean, tempData: WorkingDictionary, rng: Rng): string {
-        const subject = this.getRandomAndRemove(tempData.subjects, rng);
+    private buildCoreSentence(useSlang: boolean, bank: WorkingDictionary, used: Set<string>, rng: Rng): string {
+        const subject = this.pick([bank.subjects], used, rng);
         let s = subject;
 
         if (useSlang && rng() > 0.5) {
-            if (tempData.slangAdjectives.length > 0 && rng() < 0.5) {
-                s += " " + agree(this.getRandomAndRemove(tempData.slangAdjectives, rng), subject);
-            } else if (tempData.slang.length > 0) {
-                s += ", " + this.getRandomAndRemove(tempData.slang, rng) + ",";
+            if (!bank.slangAdjectives.isEmpty && rng() < 0.5) {
+                s += " " + agree(this.pick([bank.slangAdjectives], used, rng), subject);
+            } else if (!bank.slang.isEmpty) {
+                s += ", " + this.pick([bank.slang], used, rng) + ",";
             }
         }
 
-        const actionPools = CELEBRITIES.has(subject)
-            ? [tempData.actions]
-            : [tempData.actions, tempData.cheekyActions];
-        s += " " + this.pickFromPools(actionPools, rng);
-        s += " " + this.getRandomAndRemove(tempData.complements, rng);
+        const actionBags = CELEBRITIES.has(subject)
+            ? [bank.actions]
+            : [bank.actions, bank.cheekyActions];
+        s += " " + this.pick(actionBags, used, rng);
+        s += " " + this.pick([bank.complements], used, rng);
         
         return s;
     }
 
-    // Uniform pick across several lists, removing the chosen item from its list.
-    private pickFromPools(pools: string[][], rng: Rng): string {
-        let index = Math.floor(rng() * pools.reduce((sum, pool) => sum + pool.length, 0));
-        for (const pool of pools) {
-            if (index < pool.length) return pool.splice(index, 1)[0];
-            index -= pool.length;
-        }
-        return "";
-    }
+    // Uniform pick across bags, preferring a phrase whose key words haven't appeared yet.
+    private pick(bags: Bag[], used: Set<string>, rng: Rng): string {
+        const pools = bags.filter((bag) => !bag.isEmpty).map((bag) => bag.items());
+        const total = pools.reduce((sum, pool) => sum + pool.length, 0);
+        if (total === 0) return "";
 
-    private getRandomAndRemove(arr: string[], rng: Rng): string {
-        if (!arr || arr.length === 0) {
-            return ""; 
+        let pool = pools[0];
+        let index = 0;
+        for (let attempt = 0; attempt < ATTEMPTS; attempt++) {
+            let i = Math.floor(rng() * total);
+            let p = 0;
+            while (i >= pools[p].length) i -= pools[p++].length;
+            pool = pools[p];
+            index = i;
+            if (!keyWords(pool[index]).some((w) => used.has(w))) break;
         }
-        const index = Math.floor(rng() * arr.length);
-        const item = arr[index];
-        arr.splice(index, 1); // Remove used item
+
+        const item = pool.splice(index, 1)[0];
+        for (const w of keyWords(item)) used.add(w);
         return item;
     }
 }

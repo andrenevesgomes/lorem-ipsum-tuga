@@ -336,6 +336,104 @@ export const glossario: Categoria[] = [
         ],
     },
     {
+        id: 'de-norte-a-sul',
+        titulo: 'De norte a sul (e ilhas)',
+        entradas: [
+            {
+                termo: 'Atão, compadre',
+                procura: 'Atão, compadre,',
+                definicao:
+                    'Saudação alentejana: «atão» é «então» sem pressa, e «compadre» é qualquer pessoa com quem valha a pena conversar meia hora.',
+                exemplo: 'Atão, compadre, o campino do Ribatejo foi às vindimas.',
+            },
+            {
+                termo: 'Calma alentejana',
+                definicao:
+                    'O ritmo do Alentejo, onde o calor manda e ninguém tem pressa. Para uns é preguiça, para os alentejanos é sabedoria.',
+                exemplo: 'Respondeu ao email, com a calma alentejana, três semanas depois.',
+            },
+            {
+                termo: 'Pronúncia do Norte',
+                definicao:
+                    'O sotaque do Norte, com os «v» que soam a «b» e muita força nas palavras. Quem o tem não o perde, nem que emigre para Lisboa.',
+                exemplo: 'O tio, com pronúncia do Norte, pediu um fino.',
+            },
+            {
+                termo: 'Ó moço',
+                definicao: 'Forma de chamar alguém, ouvida sobretudo no Algarve e no Sul. O «moço» pode ter oitenta anos.',
+                exemplo: 'Ó moço, o surfista da Ericeira dançou o corridinho.',
+            },
+            {
+                termo: "C'um catano",
+                definicao: 'Exclamação de espanto ou irritação, prima do «cum caneco» e igualmente segura para dizer à frente da avó.',
+                exemplo: "Desceu o Monte num carro de cesto, c'um catano!",
+            },
+            {
+                termo: 'Ena pá',
+                definicao: 'Espanto genuíno, de quem acabou de ver uma coisa que não esperava.',
+                exemplo: 'Esperou seis horas pelo cozido das Furnas, ena pá!',
+            },
+            {
+                termo: 'Senhora das sete saias',
+                definicao:
+                    'A mulher da Nazaré com o traje tradicional de saias sobrepostas. Diz-se que são sete, como os dias da semana ou as ondas do mar.',
+                exemplo: 'A senhora das sete saias vendeu peixe seco a um turista.',
+            },
+            {
+                termo: 'Campino',
+                procura: 'campino do Ribatejo',
+                definicao: 'O guardador de touros do Ribatejo, de barrete verde e vermelho, colete e vara na mão.',
+                exemplo: 'O campino do Ribatejo foi à feira de Barcelos.',
+            },
+            {
+                termo: 'Capa e batina',
+                definicao: 'O traje académico dos estudantes, preto da cabeça aos pés. Em Coimbra veste-se com orgulho e muita serenata.',
+                exemplo: 'O estudante de capa e batina dormiu na Queima das Fitas.',
+            },
+            {
+                termo: 'Martelinho de São João',
+                procura: 'martelinho',
+                definicao:
+                    'Martelo de plástico que faz «pié». Na noite de São João, no Porto, dá-se com ele na cabeça de desconhecidos e ninguém leva a mal.',
+                exemplo: 'Deu com o martelinho em toda a gente no São João.',
+            },
+            {
+                termo: 'Carro de cesto',
+                definicao:
+                    'Trenó de vime que desce as ruas íngremes do Monte, no Funchal, guiado por dois homens de chapéu de palha. Sem travões, só com as botas.',
+                exemplo: 'Desceu o Monte num carro de cesto.',
+            },
+            {
+                termo: 'Moliceiro',
+                definicao: 'O barco colorido da Ria de Aveiro, antes usado para apanhar moliço (algas) e hoje para levar turistas.',
+                exemplo: 'Apanhou o moliceiro em Aveiro.',
+            },
+            {
+                termo: 'Galo de Barcelos',
+                procura: 'Barcelos comprar um galo',
+                definicao:
+                    'O galo de barro pintado que se tornou símbolo do país. Diz a lenda que cantou para provar a inocência de um peregrino.',
+                exemplo: 'Foi à feira de Barcelos comprar um galo.',
+            },
+            {
+                termo: 'Cante alentejano',
+                definicao: 'Canto coral do Alentejo, a várias vozes e sem instrumentos. É Património da Humanidade.',
+                exemplo: 'Cantou o cante alentejano em Évora.',
+            },
+            {
+                termo: 'Vira e corridinho',
+                procura: 'corridinho',
+                definicao: 'Danças tradicionais: o vira é do Minho, o corridinho é do Algarve. Ambos acabam com alguém tonto.',
+                exemplo: 'Dançou o vira em Braga e o corridinho em Tavira.',
+            },
+            {
+                termo: 'Vacas felizes',
+                definicao: 'As vacas dos Açores, que pastam ao ar livre o ano inteiro e ficaram famosas pela publicidade ao leite.',
+                exemplo: 'Foi ver as vacas felizes na Terceira.',
+            },
+        ],
+    },
+    {
         id: 'a-mesa',
         titulo: 'À mesa',
         entradas: [
@@ -394,6 +492,58 @@ export const glossario: Categoria[] = [
                 termo: 'Farturas',
                 definicao: 'Massa frita polvilhada com açúcar e canela, vendida em rulotes nas feiras.',
                 exemplo: 'Desapareceu na rulote das farturas.',
+            },
+            {
+                termo: 'Fino e cimbalino',
+                procura: 'cimbalino',
+                definicao: 'No Porto, a imperial chama-se fino e a bica chama-se cimbalino. Pedir «uma bica» no Porto denuncia logo um lisboeta.',
+                exemplo: 'Pediu um fino e um cimbalino na Ribeira.',
+            },
+            {
+                termo: 'Poncha',
+                definicao: 'Bebida da Madeira com aguardente de cana, mel e limão, mexida com um pau próprio. Parece inofensiva. Não é.',
+                exemplo: 'Bebeu uma poncha no Funchal.',
+            },
+            {
+                termo: 'Bolo do caco',
+                definicao: 'Pão achatado da Madeira, cozido numa pedra (o caco) e servido quente com manteiga de alho.',
+                exemplo: 'Comeu bolo do caco com manteiga de alho.',
+            },
+            {
+                termo: 'Cozido das Furnas',
+                definicao: 'Cozido à portuguesa feito em São Miguel, enterrado no chão vulcânico e cozinhado pelo calor da terra durante horas.',
+                exemplo: 'Esperou seis horas pelo cozido das Furnas.',
+            },
+            {
+                termo: 'Ovos moles',
+                definicao: 'Doce de Aveiro feito de gema de ovo e açúcar, servido em hóstia com forma de concha ou peixe.',
+                exemplo: 'Comeu ovos moles no moliceiro.',
+            },
+            {
+                termo: 'Migas e açorda',
+                procura: 'açorda alentejana',
+                definicao: 'Pratos alentejanos feitos com pão duro. A açorda leva alho, coentros, azeite, água a ferver e um ovo escalfado.',
+                exemplo: 'Comeu migas ao almoço e uma açorda alentejana ao jantar.',
+            },
+            {
+                termo: 'Papas de sarrabulho',
+                definicao: 'Prato do Minho, espesso e escuro, feito com carnes de porco e sangue. Aquece qualquer inverno.',
+                exemplo: 'Comeu papas de sarrabulho em Braga.',
+            },
+            {
+                termo: 'Tripas à moda do Porto',
+                definicao: 'Feijão com tripas. Diz-se que, quando o Porto deu a carne às naus dos Descobrimentos, ficou com as tripas; daí os portuenses serem «tripeiros».',
+                exemplo: 'Comeu tripas à moda do Porto com pronúncia do Norte.',
+            },
+            {
+                termo: 'Medronho',
+                definicao: 'Aguardente feita do fruto do medronheiro, sobretudo na serra algarvia. Aquece por dentro e por fora.',
+                exemplo: 'Ofereceram-lhe uma garrafinha de medronho em Tavira.',
+            },
+            {
+                termo: 'Vinho verde',
+                definicao: 'Vinho leve e fresco do Minho. É «verde» por ser jovem, não pela cor.',
+                exemplo: 'Bebeu um copo de vinho verde em Viana do Castelo.',
             },
         ],
     },

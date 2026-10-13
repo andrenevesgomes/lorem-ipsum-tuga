@@ -138,6 +138,29 @@ describe('TugaGenerator', () => {
         }
         expect(text).not.toMatch(/ {2}| ,|,,|, [.!?]|\? \p{Ll}/u);
     });
+
+    it('rarely repeats a phrase or a theme within one text', () => {
+        const { revistoEm: _, ...topical } = atualidade;
+        const phrases = [...Object.values(dictionary), ...Object.values(topical)].flat().filter((p) => p.length >= 8);
+        const runs = 300;
+        let repeatedPhrases = 0;
+        let repeatedWords = 0;
+        for (let seed = 0; seed < runs; seed++) {
+            const text = gen.generate(3, 50, ALL_ON, seed).join(' ');
+            repeatedPhrases += phrases.filter((p) => text.split(p).length > 2).length;
+            const counts = new Map<string, number>();
+            for (const w of text.toLowerCase().match(/\p{L}{6,}/gu) ?? []) counts.set(w, (counts.get(w) ?? 0) + 1);
+            repeatedWords += [...counts.values()].filter((c) => c > 1).length;
+        }
+        // Before one bank per text: 6.4 repeated phrases and ~15 repeated words per text.
+        expect(repeatedPhrases / runs).toBeLessThan(0.3);
+        expect(repeatedWords / runs).toBeLessThan(2);
+    });
+
+    it('still fills long texts once every phrase has been used', () => {
+        const text = gen.generate(30, 100, ALL_OFF, 7).join(' ');
+        expect(text).not.toMatch(/undefined| \.|^\s*$/);
+    });
 });
 
 describe('dictionary', () => {
