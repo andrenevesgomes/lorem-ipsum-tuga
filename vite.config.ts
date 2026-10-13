@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
@@ -31,6 +32,7 @@ function prerender(): Plugin {
 export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     react(),
+    tailwindcss(),
     // The SSR build only needs React; skip prerender/PWA to avoid recursion.
     ...(isSsrBuild
       ? []

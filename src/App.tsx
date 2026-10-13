@@ -173,7 +173,7 @@ function App() {
                         onClick={handleGenerate}
                         className={`
                             group relative px-8 py-4 rounded-full font-black text-xl uppercase tracking-wide
-                            bg-gradient-to-br from-tuga-red to-red-700 text-tuga-gold border-2 border-tuga-gold
+                            bg-linear-to-br/srgb from-tuga-red to-red-700 text-tuga-gold border-2 border-tuga-gold
                             shadow-[0_6px_0_#7f1d1d] active:shadow-[0_2px_0_#7f1d1d] active:translate-y-1
                             transition-all hover:-translate-y-1 hover:shadow-[0_10px_0_#7f1d1d]
                             flex items-center gap-3

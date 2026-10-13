@@ -82,9 +82,9 @@ export const Controls: React.FC<ControlsProps> = ({
                     value={intensity}
                     onChange={(e) => setIntensity(parseInt(e.target.value))}
                     aria-valuetext={getIntensityLabel(intensity)}
-                    className="w-full h-3 bg-gradient-to-r from-tuga-green via-tuga-green to-tuga-red rounded-lg appearance-none cursor-pointer accent-tuga-gold"
+                    className="w-full h-3 bg-linear-to-r/srgb from-tuga-green via-tuga-green to-tuga-red rounded-lg appearance-none cursor-pointer accent-tuga-gold"
                 />
-                <span className="font-bold text-tuga-red dark:text-red-400 text-lg uppercase bg-white dark:bg-gray-800 border-2 border-tuga-gold px-4 py-1 rounded-full shadow-sm">
+                <span className="font-bold text-tuga-red dark:text-red-400 text-lg uppercase bg-white dark:bg-gray-800 border-2 border-tuga-gold px-4 py-1 rounded-full shadow-xs">
                     {getIntensityLabel(intensity)}
                 </span>
             </div>

@@ -7,5 +7,3 @@ onlyBuiltDependencies:
 overrides:
   # GHSA-px8p-9vwx-vf98; @vercel/og 1.0.1 still resolves a vulnerable fflate.
   fflate@<0.7.5: ^0.7.5
-  # GHSA-rj75-hqrm-r3gf; Tailwind 3 output was verified byte-identical with 7.x.
-  postcss-selector-parser@<7.1.6: ^7.1.6
