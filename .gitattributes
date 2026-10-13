@@ -1,2 +1,3 @@
-# The CSP in vercel.json pins a hash of index.html's inline script; CRLF would change it.
+# The CSP in vercel.json pins a hash of the pages' inline script; CRLF would change it.
 index.html text eol=lf
+dicionario.html text eol=lf

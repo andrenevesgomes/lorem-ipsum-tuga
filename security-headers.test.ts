@@ -12,14 +12,20 @@ const headerFor = (source: string, key: string) =>
 describe('security headers', () => {
     const csp = headerFor('/(.*)', 'Content-Security-Policy') ?? '';
 
-    it('allows every inline script in index.html by hash (update vercel.json when they change)', () => {
-        const inlineScripts = [...read('./index.html').matchAll(/<script>([\s\S]*?)<\/script>/g)];
-        expect(inlineScripts.length).toBeGreaterThan(0);
+    it.each(['./index.html', './dicionario.html', './public/404.html'])(
+        'allows every inline script in %s by hash (update vercel.json when they change)',
+        (page) => {
+            const inlineScripts = [...read(page).matchAll(/<script>([\s\S]*?)<\/script>/g)];
 
-        for (const [, body] of inlineScripts) {
-            const hash = createHash('sha256').update(body).digest('base64');
-            expect(csp).toContain(`'sha256-${hash}'`);
-        }
+            for (const [, body] of inlineScripts) {
+                const hash = createHash('sha256').update(body).digest('base64');
+                expect(csp).toContain(`'sha256-${hash}'`);
+            }
+        },
+    );
+
+    it('finds the inline theme script it is meant to check', () => {
+        expect(read('./index.html')).toMatch(/<script>[\s\S]*?<\/script>/);
     });
 
     it('keeps the policy strict', () => {

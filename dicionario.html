@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-PT" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link id="favicon" rel="icon" type="image/svg+xml" href="/favicons/galo.svg" />
+    <script>
+      // Random Tuga Favicon Logic
+      const icons = [
+        '/favicons/acordeao.svg', // Acordeão (Accordion)
+        '/favicons/bandeira.svg', // Bandeira (Flag)
+        '/favicons/bigode.svg',   // Bigode (Mustache)
+        '/favicons/galo.svg',     // Galo (Classic)
+        '/favicons/sardinha.svg', // Sardinha (Sardine)
+        '/favicons/vinho.svg'     // Vinho (Wine Glass)
+      ];
+      const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+      document.getElementById('favicon').href = randomIcon;
+      // Dark is the default; only a saved "light" choice turns it off, before first paint.
+      try { if (localStorage.getItem('tuga-theme') === 'light') document.documentElement.classList.remove('dark'); } catch (e) {}
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#046A38" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>Dicionário Tuga: o que quer dizer carago, bué e encher chouriços | Lorem Ipsum Tuga</title>
+    <meta name="description" content="O que quer dizer carago, fónix, bué, à socapa ou ficar a ver navios? As expressões portuguesas do Lorem Ipsum Tuga explicadas, com exemplos." />
+    <meta name="author" content="André Gomes" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Lorem Ipsum Tuga" />
+    <meta property="og:locale" content="pt_PT" />
+    <meta property="og:url" content="https://encher-chouricos.vercel.app/dicionario" />
+    <meta property="og:title" content="Dicionário Tuga 🇵🇹" />
+    <meta property="og:description" content="Carago, bué, à socapa, ficar a ver navios: as expressões do Lorem Ipsum Tuga explicadas a quem não é de cá." />
+    <meta property="og:image" content="https://encher-chouricos.vercel.app/og-image.jpeg" />
+    <meta property="og:image:alt" content="Lorem Ipsum Tuga: texto de enchimento à portuguesa" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="canonical" href="https://encher-chouricos.vercel.app/dicionario" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/dicionario.ts"></script>
+  </body>
+</html>

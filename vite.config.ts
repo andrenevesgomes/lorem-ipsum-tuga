@@ -6,30 +6,36 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
-// After the client build, inject the SSR-rendered app shell into dist/index.html.
+// After the client build, inject the SSR-rendered HTML into each page.
 // Runs before the PWA plugin's closeBundle so Workbox precaches the final HTML.
+const pages = { 'index.html': 'render', 'dicionario.html': 'renderDicionario' } as const
+
 function prerender(): Plugin {
   return {
     name: 'tuga-prerender',
     apply: 'build',
     async closeBundle() {
       const entry = resolve(process.cwd(), 'dist-ssr/entry-server.js')
-      const indexPath = resolve(process.cwd(), 'dist/index.html')
-      if (!existsSync(entry) || !existsSync(indexPath)) return
+      if (!existsSync(entry)) return
+      const server = await import(pathToFileURL(entry).href)
 
-      const { render } = await import(pathToFileURL(entry).href)
-      const html = readFileSync(indexPath, 'utf8')
-      const appHtml: string = render()
-      writeFileSync(
-        indexPath,
-        html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`),
-      )
+      for (const [page, renderer] of Object.entries(pages)) {
+        const pagePath = resolve(process.cwd(), 'dist', page)
+        if (!existsSync(pagePath)) continue
+        const html = readFileSync(pagePath, 'utf8')
+        const appHtml: string = server[renderer]()
+        writeFileSync(pagePath, html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`))
+      }
     },
   }
 }
 
 // https://vitejs.dev/config/
 export default defineConfig(({ isSsrBuild }) => ({
+  // Two static pages; the SSR build has its own entry (src/entry-server.tsx).
+  build: isSsrBuild
+    ? {}
+    : { rollupOptions: { input: Object.keys(pages).map((page) => resolve(process.cwd(), page)) } },
   plugins: [
     react(),
     tailwindcss(),

@@ -45,6 +45,17 @@ export const About: React.FC = () => (
             </div>
         </div>
 
+        <p className="mt-8 text-center">
+            Não percebeste metade?{' '}
+            <a
+                href="/dicionario"
+                className="font-semibold text-tuga-green dark:text-tuga-green-bright underline underline-offset-4"
+            >
+                Há um dicionário
+            </a>
+            .
+        </p>
+
         <p className="mt-8 text-sm text-center text-gray-600 dark:text-gray-400">
             Feito com azeite em Portugal.{' '}
             <a
