@@ -1,15 +1,11 @@
 {
-  // Vercel runs api/ as unbundled Node ESM, so relative imports need explicit .js extensions.
+  // Vercel type-checks api/ and middleware.ts with the root tsconfig, so inherit it; it also runs
+  // api/ as unbundled Node ESM, so relative imports need explicit .js extensions (NodeNext).
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "jsx": "react-jsx",
-    "strict": true,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "isolatedModules": true
+    "allowImportingTsExtensions": false
   },
   "include": ["api", "middleware.ts"],
   "exclude": ["**/*.test.ts", "**/*.test.tsx"]
