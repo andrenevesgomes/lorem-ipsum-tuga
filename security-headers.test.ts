@@ -38,4 +38,8 @@ describe('security headers', () => {
     it('caches hashed build assets for a year', () => {
         expect(headerFor('/assets/(.*)', 'Cache-Control')).toBe('public, max-age=31536000, immutable');
     });
+
+    it('runs functions in Paris, the closest region to Portugal (Vercel defaults to Washington)', () => {
+        expect((vercel as unknown as { regions?: string[] }).regions).toEqual(['cdg1']);
+    });
 });
