@@ -7,6 +7,8 @@ Bem-vindo ao **Lorem Ipsum Tuga**! O único gerador de texto que grita **SIUUUUU
 
 ![License](https://img.shields.io/badge/license-MIT-green) ![Azeite Level](https://img.shields.io/badge/Azeite%20Level-Virgem%20Extra-yellow) ![Made In](https://img.shields.io/badge/Made%20In-Portugal-red)
 
+👉 **Experimenta já:** [encher-chouricos.vercel.app](https://encher-chouricos.vercel.app) · **Não percebeste metade?** [Dicionário Tuga](https://encher-chouricos.vercel.app/dicionario)
+
 ## 🚀 O que é isto?
 É a ferramenta essencial para qualquer Web Developer português que se preze. Em vez de "Dolor sit amet", tens poesia nacional.
 Ideal para preencher layouts enquanto esperas que o cliente te envie os textos (ou seja, para sempre).
@@ -14,10 +16,20 @@ Ideal para preencher layouts enquanto esperas que o cliente te envie os textos (
 Inclui:
 - 🗣️ **Expressões Típicas**: "Imagina", "Eh pá", "Ouve lá", "Diz-me uma coisa", "Estás a ver?".
 - 🌟 **Celebridades Nacionais**: Do CR7 ao Quim Barreiros, passando pelo Fernando Mendes.
-- 🥘 **Gastronomia**: Francesinhas, bifanas, sardinhas à mão, pastéis de nata e uma ginjinha para a caminhada.
+- 🥘 **Gastronomia**: Francesinhas, bifanas, sardinhas à mão, pastéis de nata e uma ginjinha para a caminhada. E ainda poncha, bolo do caco, cozido das Furnas e papas de sarrabulho.
+- 🗺️ **O País Inteiro**: Não é só Lisboa e Porto. Do compadre alentejano à senhora das sete saias, de Bragança a Sagres, com a Madeira e os Açores incluídos.
 - 🚗 **Azeite**: Uma quantidade perigosa de azeite.
 
 ## ✨ Funcionalidades Épicas
+
+### ☀️ O Chouriço do Dia
+Abres o site e o texto já lá está, sem cliques. É o mesmo para toda a gente durante o dia e muda à meia-noite de Lisboa, como o preço da gasolina.
+
+### 📖 Dicionário Tuga
+O teu colega brasileiro não sabe o que é «carago»? O [Dicionário Tuga](https://encher-chouricos.vercel.app/dicionario) explica as expressões, a comida e as personagens que o gerador atira cá para fora, com exemplos. Há um teste que garante que só lá está o que o gerador usa mesmo.
+
+### 🔁 Sem Repetições (Quase)
+O mesmo vizinho do 3.º esquerdo já não aparece três vezes no mesmo texto. O gerador gasta todas as frases antes de repetir alguma e foge de temas que já saíram.
 
 ### 🎛️ Filtros à la Carte (e que funcionam mesmo!)
 Não és fã do Quim Barreiros? Estás de dieta e não queres ver francesinhas? Sem problema. Liga e desliga as categorias como quem escolhe o recheio do prego:
@@ -49,13 +61,17 @@ Cada vez que abres o site, sai-te uma surpresa na aba do browser: um Galo, um Ac
 ### ⚽ Botão SIUUU
 Não é um botão normal. É um botão com atitude. Clica e sente a energia do Melhor do Mundo. **SIUUUUUUUU!**
 
+### 📰 Atualidade Mensal
+Todos os meses há piadas novas da atualidade, propostas por um agente a partir das manchetes. Só temas leves: impostos, calor, filas e futebol.
+
 ## 🛠️ Stack Tecnológica (Modernice)
 Isto não é um site feito no Bloco de Notas. Estamos a falar de tecnologia de ponta, mais avançada que o sistema de senhas das Finanças:
 - **React 18**: Porque somos chiques.
 - **TypeScript**: Porque gostamos de evitar erros (ao contrário da defesa da Seleção em 2004).
 - **Vite**: Mais rápido que o GNR a passar multas.
-- **Tailwind CSS**: Para ficar bonito sem esforço.
+- **Tailwind CSS 4**: Para ficar bonito sem esforço.
 - **Vitest**: Para dormir descansado, que o código não parte sozinho.
+- **Vercel**: Com as funções em Paris, como bons emigrantes. Voltam em agosto.
 
 ## 📦 Como Instalar esta Obra de Arte
 
@@ -85,9 +101,13 @@ pnpm test
 ```
 
 ## 🤝 Como Contribuir
-Queres adicionar aquela expressão que o teu tio de Trás-os-Montes diz sempre? Lê primeiro o [CONTRIBUTING.md](CONTRIBUTING.md) (voz do projeto e mensagens de commit).
+Queres adicionar aquela expressão que o teu tio de Trás-os-Montes diz sempre?
+
+**Não sabes Git?** [Sugere-a neste formulário](https://github.com/andrenevesgomes/lorem-ipsum-tuga/issues/new?template=sugerir-expressao.yml) e nós tratamos do resto. Regra da casa: humor leve, nada de ofensas, tragédias ou ataques a pessoas reais.
+
+**Sabes Git?** Lê primeiro o [CONTRIBUTING.md](CONTRIBUTING.md) (voz do projeto e mensagens de commit).
 1. Faz um **Fork**.
-2. Vai ao `src/data/dictionary.ts` (sim, agora é TypeScript, respeitinho).
+2. Vai ao `src/data/dictionary.ts` (sim, agora é TypeScript, respeitinho). Se a expressão for estranha para quem não é de cá, explica-a também no `src/data/glossario.ts`.
 3. Adiciona a tua pérola.
 4. Manda um **Pull Request**.
    - Se for bom, pagamos-te uma jola virtual 🍺.
