@@ -64,7 +64,14 @@ export const About: React.FC = () => (
             >
                 O código está no GitHub
             </a>
-            , e as expressões novas são bem-vindas.
+            {' e podes '}
+            <a
+                href="https://github.com/andrenevesgomes/lorem-ipsum-tuga/issues/new?template=sugerir-expressao.yml"
+                className="font-semibold text-tuga-green dark:text-tuga-green-bright underline underline-offset-4"
+            >
+                sugerir uma expressão nova
+            </a>
+            .
         </p>
     </section>
 );

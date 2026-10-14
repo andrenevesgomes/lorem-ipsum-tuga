@@ -85,4 +85,12 @@ describe('SEO: the dictionary page', () => {
             expect(dicionario).toContain(`id="${anchor}"`);
         }
     });
+
+    it('links both pages to the expression suggestion form, which exists', () => {
+        const form = 'sugerir-expressao.yml';
+        expect(readFileSync(new URL(`../.github/ISSUE_TEMPLATE/${form}`, import.meta.url), 'utf8')).toContain('name: ');
+        for (const html of [prerendered, dicionario]) {
+            expect(html).toContain(`/issues/new?template=${form}`);
+        }
+    });
 });

@@ -1,0 +1,65 @@
+name: Sugerir uma expressão
+description: Conheces uma expressão, comida ou personagem bem portuguesa que falta no gerador? Conta-nos.
+title: "[Expressão] "
+labels: ["expressão"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudares a encher mais chouriços! 🇵🇹
+        As melhores sugestões entram no gerador e no [Dicionário Tuga](https://encher-chouricos.vercel.app/dicionario).
+  - type: input
+    id: expressao
+    attributes:
+      label: A expressão
+      placeholder: "Ex.: estar feito ao bife"
+    validations:
+      required: true
+  - type: textarea
+    id: significado
+    attributes:
+      label: O que quer dizer?
+      description: Explica como se fosse a alguém que nunca pôs os pés em Portugal.
+      placeholder: "Ex.: estar tramado, sem saída."
+    validations:
+      required: true
+  - type: input
+    id: exemplo
+    attributes:
+      label: Uma frase de exemplo
+      placeholder: "Ex.: Esqueci-me da chave e agora estou feito ao bife."
+  - type: dropdown
+    id: regiao
+    attributes:
+      label: De onde é?
+      options:
+        - Diz-se em todo o país
+        - Norte
+        - Centro
+        - Lisboa e arredores
+        - Alentejo
+        - Algarve
+        - Madeira
+        - Açores
+        - Não sei
+    validations:
+      required: true
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: O que é?
+      options:
+        - Expressão ou calão
+        - Comida ou bebida
+        - Personagem
+        - Lugar
+        - Outra coisa
+    validations:
+      required: true
+  - type: checkboxes
+    id: regras
+    attributes:
+      label: Regras da casa
+      options:
+        - label: É humor leve, sem ofensas, tragédias nem ataques a pessoas reais.
+          required: true

@@ -90,8 +90,11 @@ export const Dicionario: React.FC = () => (
 
         <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             Falta aqui alguma?{' '}
-            <a href="https://github.com/andrenevesgomes/lorem-ipsum-tuga" className={linkClass}>
-                Sugere no GitHub
+            <a
+                href="https://github.com/andrenevesgomes/lorem-ipsum-tuga/issues/new?template=sugerir-expressao.yml"
+                className={linkClass}
+            >
+                Sugere uma expressão
             </a>
             .
         </p>
