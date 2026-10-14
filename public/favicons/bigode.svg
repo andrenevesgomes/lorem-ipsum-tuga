@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Handlebar Mustache -->
-  <path d="M10,40 Q25,10 50,40 Q75,10 90,40 Q95,55 85,60 Q70,65 50,50 Q30,65 15,60 Q5,55 10,40 Z" fill="#1a1a1a"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="#1a1a1a" d="M10,40 Q25,10 50,40 Q75,10 90,40 Q95,55 85,60 Q70,65 50,50 Q30,65 15,60 Q5,55 10,40 Z"/></svg>
