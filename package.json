@@ -9,7 +9,8 @@
     "build": "tsc && tsc -p tsconfig.api.json && vite build --ssr src/entry-server.tsx --outDir dist-ssr && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "og:dicionario": "node scripts/og-dicionario.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.1",
@@ -20,6 +21,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@fontsource/inter": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^18.3.27",
     "@types/react-dom": "^18.3.7",

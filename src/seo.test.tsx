@@ -57,6 +57,16 @@ describe('SEO: the dictionary page', () => {
         expectGoodHeadings(dicionario);
     });
 
+    it('has its own 1200x630 preview image for shared links', () => {
+        const image = dicionarioHtml.match(/<meta property="og:image" content="https:\/\/encher-chouricos\.vercel\.app\/([^"]+)"/)?.[1];
+        expect(image).toBe('og-dicionario.png');
+        expect(dicionarioHtml).toContain(`<meta name="twitter:image" content="https://encher-chouricos.vercel.app/${image}" />`);
+
+        const png = readFileSync(new URL(`../public/${image}`, import.meta.url));
+        expect([...png.subarray(1, 4)].map((c) => String.fromCharCode(c)).join('')).toBe('PNG');
+        expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual([1200, 630]);
+    });
+
     it('has its own canonical URL, linked from the generator and listed in the sitemap', () => {
         expect(dicionarioHtml).toContain('<link rel="canonical" href="https://encher-chouricos.vercel.app/dicionario" />');
         expect(prerendered).toContain('href="/dicionario"');
