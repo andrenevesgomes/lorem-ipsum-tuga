@@ -27,6 +27,7 @@ export const Controls: React.FC<ControlsProps> = ({
         if (val < 25) return "Suave";
         if (val < 50) return "Equilibrado";
         if (val < 75) return "Comó Milho";
+        if (val === 100) return "100% Virgem Extra 🫒";
         return "Azeiteiro";
     };
 
@@ -44,13 +45,14 @@ export const Controls: React.FC<ControlsProps> = ({
                 <div className="flex items-center gap-4 bg-white dark:bg-gray-800 p-2 rounded-full border-2 border-gray-100 dark:border-gray-700 shadow-inner">
                     <button 
                         onClick={() => setParagraphs(Math.max(1, paragraphs - 1))}
+                        disabled={paragraphs <= 1}
                         aria-label="Menos um parágrafo"
-                        className="w-10 h-10 rounded-full border-2 border-tuga-green bg-white dark:bg-gray-700 text-tuga-green dark:text-tuga-gold font-black text-xl hover:bg-tuga-green hover:text-white transition-all active:scale-90 flex items-center justify-center"
+                        className="w-10 h-10 rounded-full border-2 border-tuga-green bg-white dark:bg-gray-700 text-tuga-green dark:text-tuga-gold font-black text-xl hover:bg-tuga-green hover:text-white transition-all active:scale-90 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center"
                     >
                         -
                     </button>
                     <span
-                        className="w-12 text-center text-2xl font-black text-gray-800 dark:text-white"
+                        className="w-12 text-center text-2xl font-black tabular-nums text-gray-800 dark:text-white"
                         aria-live="polite"
                         aria-labelledby="paragraphs-label"
                     >
@@ -58,8 +60,9 @@ export const Controls: React.FC<ControlsProps> = ({
                     </span>
                     <button 
                         onClick={() => setParagraphs(Math.min(10, paragraphs + 1))}
+                        disabled={paragraphs >= 10}
                         aria-label="Mais um parágrafo"
-                        className="w-10 h-10 rounded-full border-2 border-tuga-green bg-white dark:bg-gray-700 text-tuga-green dark:text-tuga-gold font-black text-xl hover:bg-tuga-green hover:text-white transition-all active:scale-90 flex items-center justify-center"
+                        className="w-10 h-10 rounded-full border-2 border-tuga-green bg-white dark:bg-gray-700 text-tuga-green dark:text-tuga-gold font-black text-xl hover:bg-tuga-green hover:text-white transition-all active:scale-90 disabled:opacity-40 disabled:pointer-events-none flex items-center justify-center"
                     >
                         +
                     </button>
@@ -84,7 +87,10 @@ export const Controls: React.FC<ControlsProps> = ({
                     aria-valuetext={getIntensityLabel(intensity)}
                     className="w-full h-3 bg-linear-to-r/srgb from-tuga-green via-tuga-green to-tuga-red rounded-lg appearance-none cursor-pointer accent-tuga-gold"
                 />
-                <span className="font-bold text-tuga-red dark:text-red-400 text-lg uppercase bg-white dark:bg-gray-800 border-2 border-tuga-gold px-4 py-1 rounded-full shadow-xs">
+                <span
+                    key={getIntensityLabel(intensity)}
+                    className="font-bold text-tuga-red dark:text-red-400 text-lg uppercase bg-white dark:bg-gray-800 border-2 border-tuga-gold px-4 py-1 rounded-full shadow-xs animate-carimbo"
+                >
                     {getIntensityLabel(intensity)}
                 </span>
             </div>

@@ -3,9 +3,10 @@ import { Flag } from './Flag';
 
 interface OutputBoxProps {
     text: string[];
+    animKey?: number;
 }
 
-export const OutputBox: React.FC<OutputBoxProps> = ({ text }) => {
+export const OutputBox: React.FC<OutputBoxProps> = ({ text, animKey = 0 }) => {
     return (
         <div
             className="relative bg-white dark:bg-gray-800 border-4 border-tuga-green rounded-2xl p-8 min-h-[150px] text-left shadow-inner transition-colors duration-300"
@@ -18,7 +19,7 @@ export const OutputBox: React.FC<OutputBoxProps> = ({ text }) => {
             ) : (
                 <div id="output-text" className="space-y-6">
                     {text.map((paragraph, idx) => (
-                        <p key={idx} className="text-lg leading-relaxed text-gray-800 dark:text-gray-200 animate-slide-up">
+                        <p key={`${animKey}-${idx}`} className="text-lg leading-relaxed text-gray-800 dark:text-gray-200 animate-slide-up">
                             {paragraph}
                         </p>
                     ))}

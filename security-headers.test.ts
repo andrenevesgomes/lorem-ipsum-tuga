@@ -12,7 +12,7 @@ const headerFor = (source: string, key: string) =>
 describe('security headers', () => {
     const csp = headerFor('/(.*)', 'Content-Security-Policy') ?? '';
 
-    it.each(['./index.html', './dicionario.html', './public/404.html'])(
+    it.each(['./index.html', './dicionario.html', './404.html'])(
         'allows every inline script in %s by hash (update vercel.json when they change)',
         (page) => {
             const inlineScripts = [...read(page).matchAll(/<script>([\s\S]*?)<\/script>/g)];

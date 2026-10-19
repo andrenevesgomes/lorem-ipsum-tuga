@@ -32,10 +32,10 @@ function prerender(): Plugin {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ isSsrBuild }) => ({
-  // Two static pages; the SSR build has its own entry (src/entry-server.tsx).
+  // The prerendered pages plus the hand-written 404; the SSR build has its own entry (src/entry-server.tsx).
   build: isSsrBuild
     ? {}
-    : { rollupOptions: { input: Object.keys(pages).map((page) => resolve(process.cwd(), page)) } },
+    : { rollupOptions: { input: [...Object.keys(pages), '404.html'].map((page) => resolve(process.cwd(), page)) } },
   plugins: [
     react(),
     tailwindcss(),
@@ -66,7 +66,7 @@ export default defineConfig(({ isSsrBuild }) => ({
             workbox: {
               // The OG image is for scrapers and manifest icons are added by the plugin; neither belongs in every visitor's first load.
               globPatterns: ['**/*.{js,css,html,svg,woff2}'],
-              globIgnores: ['404.html', '404.css'],
+              globIgnores: ['404.html', 'assets/404-*'],
               // Single-route app: only "/" (with or without share params) falls back offline, so unknown paths still reach the real 404.
               navigateFallbackAllowlist: [/^\/(\?.*)?$/],
             },
