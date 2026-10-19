@@ -81,6 +81,10 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Visible focus ring for keyboard users (mouse clicks stay ring-free); gold is invisible on white */
@@ -96,6 +100,9 @@
 
 /* Respect users who prefer reduced motion: kill the SIUUU shake and slide-in */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   .animate-siuuu,
   .animate-slide-up,
   .animate-carimbo {
