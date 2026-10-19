@@ -81,7 +81,7 @@ export const Dicionario: React.FC = () => (
             <p className="mt-12 text-center">
                 <a
                     href="/"
-                    className="inline-block px-8 py-4 rounded-full font-black text-lg uppercase tracking-wide bg-linear-to-br/srgb from-tuga-red to-red-700 text-tuga-gold border-2 border-tuga-gold shadow-[0_6px_0_#7f1d1d] hover:-translate-y-1 hover:shadow-[0_10px_0_#7f1d1d] transition-all"
+                    className="inline-block px-8 py-4 rounded-full font-black text-lg uppercase tracking-wide bg-linear-to-br/srgb from-tuga-red to-red-700 text-tuga-gold border-2 border-tuga-gold shadow-[0_6px_0_#7f1d1d] hover:-translate-y-1 hover:shadow-[0_10px_0_#7f1d1d] active:translate-y-1 active:shadow-[0_2px_0_#7f1d1d] transition-all"
                 >
                     Já percebeste? Vai gerar um chouriço
                 </a>

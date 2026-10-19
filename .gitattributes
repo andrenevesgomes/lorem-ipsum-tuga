@@ -1,3 +1,4 @@
 # The CSP in vercel.json pins a hash of the pages' inline script; CRLF would change it.
 index.html text eol=lf
 dicionario.html text eol=lf
+404.html text eol=lf

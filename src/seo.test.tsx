@@ -94,3 +94,24 @@ describe('SEO: the dictionary page', () => {
         }
     });
 });
+
+describe('404 page', () => {
+    const notFound = readFileSync(new URL('../404.html', import.meta.url), 'utf8');
+
+    it('stays out of search results and still makes sense without JavaScript', () => {
+        expect(notFound).toContain('<meta name="robots" content="noindex" />');
+        expect(notFound).toMatch(/<h1[^>]*>\s*Esta página não existe\.\s*<\/h1>/);
+        expect(notFound).toMatch(/<p id="antes"[^>]*>[\s\S]*?\S[\s\S]*?<\/p>/);
+        expect(notFound).toMatch(/<p id="agora"[^>]*>[\s\S]*?\S[\s\S]*?<\/p>/);
+        expect(notFound).toContain('src="/ze-povinho-1875.png"');
+        expect(notFound).toContain('Rafael Bordalo Pinheiro');
+        expect(notFound).toContain('href="/"');
+
+        const ze = readFileSync(new URL('../public/ze-povinho-1875.png', import.meta.url));
+        expect([...ze.subarray(1, 4)].map((c) => String.fromCharCode(c)).join('')).toBe('PNG');
+    });
+
+    it('has no inline styles (the CSP would block them)', () => {
+        expect(notFound).not.toMatch(/\sstyle=|<style/);
+    });
+});

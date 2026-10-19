@@ -5,9 +5,10 @@ import { Flag } from './Flag';
 interface HeaderProps {
     darkMode: boolean;
     toggleDarkMode: () => void;
+    onFlagClick?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
+export const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode, onFlagClick }) => {
     return (
         <div className="relative mb-8">
             <button 
@@ -20,7 +21,9 @@ export const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
             </button>
             
             <h1 className="text-4xl md:text-5xl font-black text-tuga-red uppercase tracking-tighter mb-2 drop-shadow-[2px_2px_0px_rgba(255,215,0,1)]">
-                <Flag className="inline-block w-11 h-8 md:w-14 md:h-10 mr-3 align-[-0.12em]" />
+                <span onClick={onFlagClick} className="inline-block cursor-pointer select-none">
+                    <Flag className="inline-block w-11 h-8 md:w-14 md:h-10 mr-3 align-[-0.12em]" />
+                </span>
                 Lorem Ipsum Tuga
             </h1>
             <p className="text-lg font-semibold text-gray-600 dark:text-gray-400 border-b-2 border-gray-200 dark:border-gray-700 inline-block pb-1">
